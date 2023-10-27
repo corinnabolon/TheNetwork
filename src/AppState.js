@@ -12,5 +12,8 @@ export const AppState = reactive({
   /** @type {import('./models/Ad.js').Ad[]} */
   ads: [],
   /** @type {import('./models/Profile.js').Profile[]} */
-  searchedProfiles: []
+  searchedProfiles: [],
+
+  previousPage: null,
+  nextPage: null,
 })

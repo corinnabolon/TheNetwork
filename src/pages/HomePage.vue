@@ -3,6 +3,10 @@
     <div v-for="post in posts" :key="post.id" class="col-12">
       <PostCard :postProp="post" />
     </div>
+    <div class="col-12 d-flex justify-content-around mt-3 mb-4">
+      <button :disabled="!previous" class="btn btn-success"><i class="mdi mdi-arrow-left"></i>Previous 20 Posts</button>
+      <button :disabled="!next" class="btn btn-success">Next 20 Posts<i class="mdi mdi-arrow-right"></i></button>
+    </div>
   </section>
 </template>
 
@@ -11,7 +15,6 @@ import { computed, onMounted } from "vue";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AppState } from "../AppState.js"
-import { logger } from "../utils/Logger.js";
 import { profilesService } from "../services/ProfilesService.js";
 
 export default {
@@ -32,7 +35,9 @@ export default {
 
     return {
       posts: computed(() => AppState.posts),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      previous: computed(() => AppState.previousPage),
+      next: computed(() => AppState.nextPage),
     };
   },
 }

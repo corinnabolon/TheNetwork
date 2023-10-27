@@ -1,8 +1,13 @@
 <template>
-  <div class="component">
-
-    {{ searchResultsProp.name }}
-  </div>
+  <router-link :to="{ name: 'Profile', params: { profileId: searchResultsProp.id } }">
+    <div class="col-12 bg-light rounded shadow my-3 d-flex">
+      <img :src="searchResultsProp.picture" :alt="searchResultsProp.name" class="rounded-circle profile-picture">
+      <div class="ms-5 mt-3">
+        <p class="fs-5 mb-0">{{ searchResultsProp.class }}</p>
+        <p class="fs-1">{{ searchResultsProp.name }}</p>
+      </div>
+    </div>
+  </router-link>
 </template>
 
 
@@ -21,4 +26,11 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 20px;
+}
+</style>

@@ -11,7 +11,9 @@ class PostsService {
     const res = await api.get("api/posts")
     let newPosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = newPosts
-    logger.log("Got posts", AppState.posts)
+    logger.log("Got posts", res.data)
+    AppState.nextPage = res.data.older;
+    AppState.previousPage = res.data.newer;
   }
 
   async likePost(postId) {
