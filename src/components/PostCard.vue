@@ -25,7 +25,7 @@
 <script>
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
@@ -36,7 +36,6 @@ export default {
   setup(props) {
 
     return {
-      userLikes,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       isLikedByAccount: computed(() =>
