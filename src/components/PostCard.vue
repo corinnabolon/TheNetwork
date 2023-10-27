@@ -1,12 +1,12 @@
 <template>
   <section class="row align-items-center bg-light rounded shadow justify-content-around my-3">
     <div class="col-10">
-      <!-- <router-link v-if="!activeBlogger" :to="{ name: 'Blog', params: { userId: blogProp.creator.id } }"> -->
-      <div class="d-flex">
-        <img :src="postProp.creator.picture" :alt="postProp.creator.name" class="rounded-circle user-image">
-        <p>{{ postProp.creator.name }}</p>
-      </div>
-      <!-- </router-link> -->
+      <router-link v-if="!activeProfile" :to="{ name: 'Profile', params: { profileId: postProp.creator.id } }">
+        <div class="d-flex">
+          <img :src="postProp.creator.picture" :alt="postProp.creator.name" class="rounded-circle user-image">
+          <p>{{ postProp.creator.name }}</p>
+        </div>
+      </router-link>
       <div class="col-12">
         <p>Published: {{ postProp.createdAt }} Last Updated: {{ postProp.updatedAt }}</p>
         <p>{{ postProp.body }}</p>
@@ -25,7 +25,7 @@
 <script>
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
@@ -38,6 +38,7 @@ export default {
     return {
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
+      activeProfile: computed(() => AppState.activeProfile),
       isLikedByAccount: computed(() =>
         props.postProp.likeIds.includes(AppState.account.id)
       ),

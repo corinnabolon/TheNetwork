@@ -7,6 +7,7 @@ import { api } from "./AxiosService.js"
 class PostsService {
 
   async getPosts() {
+    AppState.activeProfile = null
     const res = await api.get("api/posts")
     let newPosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = newPosts

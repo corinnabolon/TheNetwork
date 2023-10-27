@@ -3,7 +3,16 @@
     <Navbar />
   </header>
   <main class="themeBg">
-    <router-view />
+    <div class="container-fluid">
+      <section class="row">
+        <div class="col-10">
+          <router-view />
+        </div>
+        <div class="col-2">
+          <AdCard />
+        </div>
+      </section>
+    </div>
   </main>
   <footer>
   </footer>

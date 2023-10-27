@@ -1,11 +1,9 @@
 <template>
-  <div class="container-fluid">
-    <section class="row">
-      <div v-for="post in posts" :key="post.id" class="col-12">
-        <PostCard :postProp="post" />
-      </div>
-    </section>
-  </div>
+  <section class="row">
+    <div v-for="post in posts" :key="post.id" class="col-12">
+      <PostCard :postProp="post" />
+    </div>
+  </section>
 </template>
 
 <script>
