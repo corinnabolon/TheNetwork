@@ -1,7 +1,8 @@
 <template>
   <div v-if="ads.length">
-    <img :src="ads[0].tall" alt="an ad" class="img-fluid ad-height my-3">
-    <img :src="ads[1].tall" alt="an ad" class="img-fluid ad-height my-3">
+    <div v-for="ad in  ads " :key="ad.title" class="col-12">
+      <a :href="`https://${ad.linkURL}`"><img :src="ad.tall" alt="an ad" class="img-fluid ad-height my-3"></a>
+    </div>
   </div>
 </template>
 

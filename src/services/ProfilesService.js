@@ -8,7 +8,6 @@ import { api } from "./AxiosService.js"
 class ProfilesService {
 
   async getProfileFromUrl(profileId) {
-    AppState.activeProfile = null
     const res = await api.get(`api/profiles/${profileId}`)
     AppState.activeProfile = new Profile(res.data)
     logger.log(AppState.activeProfile)
@@ -19,6 +18,17 @@ class ProfilesService {
     let profilePosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = profilePosts
     logger.log("Got posts", AppState.posts)
+  }
+
+  async searchProfiles(query) {
+    const res = await api.get(`api/profiles?query=${query}`)
+    AppState.searchedProfiles = res.data.map((POJO) => new Profile(POJO))
+    logger.log(AppState.searchedProfiles)
+  }
+
+  clearData() {
+    AppState.activeProfile = null
+    AppState.searchedProfiles = []
   }
 
 }

@@ -12,10 +12,12 @@ import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AppState } from "../AppState.js"
 import { logger } from "../utils/Logger.js";
+import { profilesService } from "../services/ProfilesService.js";
 
 export default {
   setup() {
     onMounted(() => {
+      profilesService.clearData();
       getPosts();
     });
 

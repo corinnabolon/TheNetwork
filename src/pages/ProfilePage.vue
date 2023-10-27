@@ -26,6 +26,7 @@ import { AppState } from "../AppState.js"
 export default {
   setup() {
     onMounted(() => {
+      profilesService.clearData();
       getProfileFromUrl();
       getPostsWithProfileId();
     })
