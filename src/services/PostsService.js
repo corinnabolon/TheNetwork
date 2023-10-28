@@ -41,6 +41,14 @@ class PostsService {
     AppState.posts = AppState.posts.filter((post) => post.id != postId)
   }
 
+  async searchPosts(query) {
+    const res = await api.get(`api/posts?query=${query}`)
+    let searchedPosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
+    AppState.posts = searchedPosts
+    AppState.nextPage = res.data.older;
+    AppState.previousPage = res.data.newer;
+  }
+
 }
 
 export const postsService = new PostsService()

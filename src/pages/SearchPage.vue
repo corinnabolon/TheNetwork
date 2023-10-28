@@ -9,8 +9,30 @@
       <button :disabled="editable == ''" type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  <div v-for="profile in searchedProfiles" :key="profile.id">
-    <SearchResultsCard :searchResultsProp="profile" />
+  <div>
+    <form @submit.prevent="searchPosts()">
+      <div class="mb-3">
+        <label for="searchPosts" class="form-label">Posts Search</label>
+        <input v-model="editable2" type="text" class="form-control" id="searchPosts">
+        <div class="form-text">Search through posts.</div>
+      </div>
+      <button :disabled="editable2 == ''" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div>
+    <div v-if="haveSearchedProfiles">
+      <div v-for="profile in searchedProfiles" :key="profile.id">
+        <ProfileSearchResultsCard :searchResultsProp="profile" />
+      </div>
+    </div>
+    <div v-else-if="haveSearchedPosts">
+      <!-- <div v-for="post in searchedPosts" :key="post.id">
+        <PostsSearchResultsCard :searchResultsProp="post" />
+      </div> -->
+      <div v-for="post in searchedPosts" :key="post.id" class="col-12">
+        <PostCard :postProp="post" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,6 +42,8 @@ import { AppState } from '../AppState';
 import { computed, onMounted, ref } from 'vue';
 import { profilesService } from "../services/ProfilesService.js";
 import Pop from "../utils/Pop.js";
+import { postsService } from "../services/PostsService.js";
+
 
 export default {
   setup() {
@@ -28,15 +52,39 @@ export default {
     })
 
     const editable = ref("")
+    const editable2 = ref("")
+    let haveSearchedProfiles = ref(false)
+    let haveSearchedPosts = ref(false)
 
     return {
       editable,
+      editable2,
+      haveSearchedProfiles,
+      haveSearchedPosts,
       searchedProfiles: computed(() => AppState.searchedProfiles),
+      searchedPosts: computed(() => AppState.posts),
 
       async searchProfiles() {
         try {
+          AppState.searchedProfiles = []
+          haveSearchedProfiles.value = true
+          haveSearchedPosts.value = false
           let searchQuery = editable.value
           await profilesService.searchProfiles(searchQuery)
+          editable.value = ""
+        } catch (error) {
+          Pop.error(error)
+        }
+      },
+
+      async searchPosts() {
+        try {
+          AppState.posts = []
+          haveSearchedProfiles.value = false
+          haveSearchedPosts.value = true
+          let searchQuery = editable2.value
+          await postsService.searchPosts(searchQuery)
+          editable2.value = ""
         } catch (error) {
           Pop.error(error)
         }
