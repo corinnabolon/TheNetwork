@@ -42,6 +42,7 @@ export default {
   props: { profileProp: { type: Profile, required: true } },
 
   setup(props) {
+
     return {
       account: computed(() => AppState.account),
       profileCoverImg: computed(() => `url(${props.profileProp.coverImg})`)

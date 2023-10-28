@@ -16,4 +16,5 @@ export const AppState = reactive({
 
   previousPage: null,
   nextPage: null,
+  wantsToSeeForm: false,
 })

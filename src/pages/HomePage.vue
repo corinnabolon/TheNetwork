@@ -3,18 +3,7 @@
     <div v-if="account.id" class="col-12">
       <button @click="flipWantsToSee()" v-if="account" class="btn btn-success mt-3">Make a New Post</button>
       <div v-if="wantsToSee">
-        <form @submit.prevent="writePost()">
-          <div>
-            <label for="body" class="form-label">Your Post</label>
-            <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body" required
-              aria-describedby="body" />
-          </div>
-          <div>
-            <label for="imgUrl" class="form-label">Add an image! (optional)</label>
-            <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
-          </div>
-          <button class="btn btn-success mt-3" type="submit">Post</button>
-        </form>
+        <PostForm />
       </div>
     </div>
     <div v-for="post in posts" :key="post.id" class="col-12">
@@ -38,8 +27,6 @@ import { profilesService } from "../services/ProfilesService.js";
 
 export default {
   setup() {
-    const editable = ref({})
-    let wantsToSee = ref(false)
 
     onMounted(() => {
       profilesService.clearData();
@@ -52,7 +39,9 @@ export default {
     }
 
     function flipWantsToSee() {
-      wantsToSee.value = !wantsToSee.value
+      let wantsToSee = AppState.wantsToSeeForm
+      wantsToSee = !wantsToSee
+      AppState.wantsToSeeForm = wantsToSee
     }
 
     async function getPosts() {
@@ -64,24 +53,12 @@ export default {
     }
 
     return {
-      editable,
-      wantsToSee,
       flipWantsToSee,
+      wantsToSee: computed(() => AppState.wantsToSeeForm),
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       previous: computed(() => AppState.previousPage),
       next: computed(() => AppState.nextPage),
-
-      async writePost() {
-        try {
-          let postContent = editable.value
-          await postsService.writePost(postContent)
-          flipWantsToSee()
-          editable.value = {}
-        } catch (error) {
-          Pop.error(error)
-        }
-      },
 
       async changePage(url) {
         try {
