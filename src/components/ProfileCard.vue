@@ -13,8 +13,12 @@
           <a v-if="profileProp.resume" :href="profileProp.resume"><i class="mdi mdi-text-box-outline mx-3"></i></a>
         </div>
         <div class="mt-5">
-          <p>{{ profileProp.class }} <i v-if="profileProp.graduated" class="mdi mdi-book"
-              :title="`${profileProp.name} has graduated!`"></i></p>
+          <p>{{ profileProp.class }}
+            <i v-if="profileProp.graduated" class="mdi mdi-account-school"
+              :title="`${profileProp.name} has graduated!`"></i>
+            <i v-else="profileProp.graduated" class="mdi mdi-chair-school"
+              :title="`${profileProp.name} has not graduated yet!`"></i>
+          </p>
           <p class="fs-1">{{ profileProp.name }}</p>
         </div>
         <div>

@@ -12,9 +12,14 @@
         <p>{{ postProp.body }}</p>
         <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="Post Image" class="img-fluid">
         <div class="d-flex justify-content-end">
-          <div>
-            <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)" class="mdi mdi-heart"></i>
-            <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline"></i>
+          <div v-if="!account.id">
+            <i role="button" @click="sendToLogin()" class="mdi mdi-heart-outline"></i>
+          </div>
+          <div v-else>
+            <div>
+              <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)" class="mdi mdi-heart"></i>
+              <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline"></i>
+            </div>
           </div>
           <p v-if="postProp.likes.length >= 1">{{ postProp.likes.length }}</p>
         </div>
@@ -31,9 +36,9 @@
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
 import { computed } from 'vue';
-import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
+import { AuthService } from '../services/AuthService'
 
 export default {
   props: { postProp: { type: Post, required: true } },
@@ -50,7 +55,6 @@ export default {
 
       async likePost(postId) {
         try {
-          logger.log("Liked this post!", postId)
           await postsService.likePost(postId)
           let targetPost = AppState.posts.find(post => post.id == postId)
           if (!targetPost) {
@@ -77,6 +81,11 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+
+      async sendToLogin() {
+        AuthService.loginWithPopup()
       }
     }
 

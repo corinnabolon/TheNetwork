@@ -59,7 +59,6 @@
 // import { Account } from "../models/Account.js";
 import { AppState } from '../AppState';
 import { computed, ref, watchEffect } from "vue";
-import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 import { accountService } from "../services/AccountService.js";
 import { useRouter } from "vue-router";
@@ -90,7 +89,6 @@ export default {
       async editAccount() {
         try {
           let editedData = editable.value
-          logger.log("Editing account data", editedData)
           await accountService.editAccount(editedData)
           profilesService.clearData()
           Pop.success("Account edits saved!")

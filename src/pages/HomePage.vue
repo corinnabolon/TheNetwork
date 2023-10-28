@@ -1,21 +1,21 @@
 <template>
   <section class="row">
-    <div class="col-12">
+    <div v-if="account.id" class="col-12">
       <button @click="flipWantsToSee()" v-if="account" class="btn btn-success mt-3">Make a New Post</button>
-    </div>
-    <div v-if="wantsToSee">
-      <form @submit.prevent="writePost()">
-        <div>
-          <label for="body" class="form-label">Your Post</label>
-          <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body" required
-            aria-describedby="body" />
-        </div>
-        <div>
-          <label for="imgUrl" class="form-label">Add an image! (optional)</label>
-          <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
-        </div>
-        <button class="btn btn-success mt-3" type="submit">Post</button>
-      </form>
+      <div v-if="wantsToSee">
+        <form @submit.prevent="writePost()">
+          <div>
+            <label for="body" class="form-label">Your Post</label>
+            <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body" required
+              aria-describedby="body" />
+          </div>
+          <div>
+            <label for="imgUrl" class="form-label">Add an image! (optional)</label>
+            <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
+          </div>
+          <button class="btn btn-success mt-3" type="submit">Post</button>
+        </form>
+      </div>
     </div>
     <div v-for="post in posts" :key="post.id" class="col-12">
       <PostCard :postProp="post" />
@@ -44,7 +44,12 @@ export default {
     onMounted(() => {
       profilesService.clearData();
       getPosts();
+      scrollToTop();
     });
+
+    function scrollToTop() {
+      window.scrollTo(0, 0);
+    }
 
     function flipWantsToSee() {
       wantsToSee.value = !wantsToSee.value
@@ -81,6 +86,7 @@ export default {
       async changePage(url) {
         try {
           await postsService.changePage(url)
+          scrollToTop()
         } catch (error) {
           Pop.error(error)
         }
