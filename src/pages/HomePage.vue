@@ -1,5 +1,22 @@
 <template>
   <section class="row">
+    <div class="col-12">
+      <button @click="flipWantsToSee()" v-if="account" class="btn btn-success mt-3">Make a New Post</button>
+    </div>
+    <div v-if="wantsToSee">
+      <form @submit.prevent="writePost()">
+        <div>
+          <label for="body" class="form-label">Your Post</label>
+          <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body" required
+            aria-describedby="body" />
+        </div>
+        <div>
+          <label for="imgUrl" class="form-label">Add an image! (optional)</label>
+          <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
+        </div>
+        <button class="btn btn-success mt-3" type="submit">Post</button>
+      </form>
+    </div>
     <div v-for="post in posts" :key="post.id" class="col-12">
       <PostCard :postProp="post" />
     </div>
@@ -13,7 +30,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AppState } from "../AppState.js"
@@ -21,11 +38,17 @@ import { profilesService } from "../services/ProfilesService.js";
 
 export default {
   setup() {
+    const editable = ref({})
+    let wantsToSee = ref(false)
+
     onMounted(() => {
       profilesService.clearData();
       getPosts();
     });
 
+    function flipWantsToSee() {
+      wantsToSee.value = !wantsToSee.value
+    }
 
     async function getPosts() {
       try {
@@ -36,10 +59,24 @@ export default {
     }
 
     return {
+      editable,
+      wantsToSee,
+      flipWantsToSee,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       previous: computed(() => AppState.previousPage),
       next: computed(() => AppState.nextPage),
+
+      async writePost() {
+        try {
+          let postContent = editable.value
+          await postsService.writePost(postContent)
+          flipWantsToSee()
+          editable.value = {}
+        } catch (error) {
+          Pop.error(error)
+        }
+      },
 
       async changePage(url) {
         try {

@@ -11,11 +11,16 @@
         <p>Published: {{ postProp.createdAt }} Last Updated: {{ postProp.updatedAt }}</p>
         <p>{{ postProp.body }}</p>
         <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="Post Image" class="img-fluid">
-        <div>
-          <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)" class="mdi mdi-heart"></i>
-          <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline"></i>
+        <div class="d-flex justify-content-end">
+          <div>
+            <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)" class="mdi mdi-heart"></i>
+            <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline"></i>
+          </div>
+          <p v-if="postProp.likes.length >= 1">{{ postProp.likes.length }}</p>
         </div>
-        <p v-if="postProp.likes.length >= 1">{{ postProp.likes.length }}</p>
+        <div v-if="postProp.creator.id == account.id">
+          <button @click="deletePost()" class="btn btn-danger mb-2">Delete Post</button>
+        </div>
       </div>
     </div>
   </section>
@@ -59,9 +64,24 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+      async deletePost() {
+        try {
+          let wantsToDelete = await Pop.confirm("Are you sure you want to delete this post?")
+          if (!wantsToDelete) {
+            return
+          }
+          let postId = props.postProp.id
+          await postsService.deletePost(postId)
+        } catch (error) {
+          Pop.error(error)
+        }
       }
     }
+
   }
+
 };
 </script>
 
