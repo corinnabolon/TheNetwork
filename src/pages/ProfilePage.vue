@@ -24,7 +24,7 @@
 import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
 import { logger } from "../utils/Logger.js";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import { profilesService } from "../services/ProfilesService.js"
 import { AppState } from "../AppState.js"
 import { postsService } from "../services/PostsService.js"
@@ -36,6 +36,10 @@ export default {
       profilesService.clearData();
       getProfileFromUrl();
       getPostsWithProfileId();
+    })
+
+    onUnmounted(() => {
+      AppState.activeProfile = null;
     })
 
     const route = useRoute();

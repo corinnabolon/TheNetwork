@@ -20,6 +20,9 @@
         <div>
           <p>{{ profileProp.bio }}</p>
         </div>
+        <router-link v-if="profileProp.id == account.id" :to="{ name: 'Account' }">
+          <button class="btn btn-success">Edit Account Information</button>
+        </router-link>
       </div>
     </div>
   </section>
@@ -29,12 +32,14 @@
 <script>
 import { computed } from "vue";
 import { Profile } from "../models/Profile.js";
+import { AppState } from '../AppState';
 
 export default {
   props: { profileProp: { type: Profile, required: true } },
 
   setup(props) {
     return {
+      account: computed(() => AppState.account),
       profileCoverImg: computed(() => `url(${props.profileProp.coverImg})`)
 
     }
