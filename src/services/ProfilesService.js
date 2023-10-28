@@ -17,7 +17,9 @@ class ProfilesService {
     const res = await api.get(`api/profiles/${profileId}/posts`)
     let profilePosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = profilePosts
-    logger.log("Got posts", AppState.posts)
+    logger.log("Res.data", res.data)
+    AppState.nextPage = res.data.older;
+    AppState.previousPage = res.data.newer;
   }
 
   async searchProfiles(query) {
@@ -29,6 +31,8 @@ class ProfilesService {
   clearData() {
     AppState.activeProfile = null
     AppState.searchedProfiles = []
+    AppState.nextPage = null
+    AppState.previousPage = null
   }
 
 }

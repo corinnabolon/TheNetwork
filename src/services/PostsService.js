@@ -25,6 +25,14 @@ class PostsService {
     AppState.posts.splice(postIndex, 1, updatedPost)
   }
 
+  async changePage(url) {
+    const res = await api.get(url)
+    let newPosts = res.data.posts.map((POJO) => new Post(POJO))
+    AppState.posts = newPosts;
+    AppState.nextPage = res.data.older;
+    AppState.previousPage = res.data.newer;
+  }
+
 }
 
 export const postsService = new PostsService()
