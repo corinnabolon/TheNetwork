@@ -32,6 +32,7 @@
       <div v-for="post in searchedPosts" :key="post.id" class="col-12">
         <PostCard :postProp="post" />
       </div>
+      <NextPreviousCard />
     </div>
   </div>
 </template>
