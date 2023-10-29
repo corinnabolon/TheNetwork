@@ -1,22 +1,24 @@
 <template>
-  <div>
+  <div class="mt-4">
     <form @submit.prevent="searchProfiles()">
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="searchProfiles" class="form-label">Profile Search</label>
-        <input v-model="editable" type="text" class="form-control" id="searchProfiles">
+        <input v-model="editable" type="text" class="form-control" id="searchProfiles" title="Search through profiles"
+          maxlength="100" minlength="3">
         <div class="form-text">Search through profile names.</div>
       </div>
-      <button :disabled="editable == ''" type="submit" class="btn btn-theme">Submit</button>
+      <button :disabled="editable == ''" type="submit" class="btn btn-theme" title="Submit search query">Submit</button>
     </form>
   </div>
-  <div>
+  <div class="mt-4">
     <form @submit.prevent="searchPosts()">
-      <div class="mb-3">
+      <div class="mb-2">
         <label for="searchPosts" class="form-label">Posts Search</label>
-        <input v-model="editable2" type="text" class="form-control" id="searchPosts">
+        <input v-model="editable2" type="text" class="form-control" id="searchPosts" title="Search through posts"
+          maxlength="100" minlength="3">
         <div class="form-text">Search through posts.</div>
       </div>
-      <button :disabled="editable2 == ''" type="submit" class="btn btn-theme">Submit</button>
+      <button :disabled="editable2 == ''" type="submit" class="btn btn-theme" title="Submit search query">Submit</button>
     </form>
   </div>
   <div>

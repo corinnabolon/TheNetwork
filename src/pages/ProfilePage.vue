@@ -14,7 +14,8 @@
             </div>
           </div>
           <div v-if="account.id == activeProfile.id">
-            <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3">Make a New Post</button>
+            <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3" title="Make a new Post">Make a New
+              Post</button>
             <div v-if="wantsToSee">
               <PostForm />
             </div>
@@ -25,7 +26,8 @@
           <NextPreviousCard />
         </div>
         <div v-else>
-          <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3">Make a New Post</button>
+          <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3" title="Make a new Post">Make a New
+            Post</button>
           <div v-if="wantsToSee">
             <PostForm />
           </div>

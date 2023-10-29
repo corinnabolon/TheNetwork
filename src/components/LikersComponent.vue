@@ -5,7 +5,7 @@
         <div class="modal-header">
           <p class="modal-title fs-4 font-themeGreen agbalumo">Likers of This Post</p>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-            @click="resetAppStateLikers()"></button>
+            @click="resetAppStateLikers()" title="Close"></button>
         </div>
         <div class="modal-body">
           <p class="list">{{ likers }}</p>

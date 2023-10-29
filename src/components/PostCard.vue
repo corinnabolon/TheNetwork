@@ -2,7 +2,7 @@
   <section class="row align-items-center">
     <div class="col-12 col-md-11 light-brown-bg rounded shadow justify-content-around my-3 mx-5 px-5 py-3">
       <router-link v-if="!activeProfile" :to="{ name: 'Profile', params: { profileId: postProp.creator.id } }">
-        <div class="d-flex">
+        <div class="d-flex" :title="`${postProp.creator.name}'s Profile`">
           <img :src="postProp.creator.picture" :alt="postProp.creator.name" class="rounded-circle user-image">
           <p class="ms-2">{{ postProp.creator.name }}</p>
         </div>
@@ -21,17 +21,19 @@
           </div>
           <div class="d-flex fs-3">
             <div v-if="!account.id">
-              <i role="button" @click="sendToLogin()" class="mdi mdi-heart-outline heart-theme"></i>
+              <i role="button" title="Login to like a post" @click="sendToLogin()"
+                class="mdi mdi-heart-outline heart-theme"></i>
             </div>
             <div v-else>
               <div>
-                <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)"
+                <i v-if="isLikedByAccount" title="Click to unlike this post" role="button" @click="likePost(postProp.id)"
                   class="mdi mdi-heart heart-theme"></i>
-                <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline heart-theme"></i>
+                <i v-else role="button" title="Click to like this post" @click="likePost(postProp.id)"
+                  class="mdi mdi-heart-outline heart-theme"></i>
               </div>
             </div>
             <p v-if="postProp.likes.length >= 1" class="number-theme" role="button" @click="findLikers()"
-              data-bs-toggle="modal" data-bs-target="#LikersModal" :title="likerList">{{
+              data-bs-toggle="modal" data-bs-target="#LikersModal" :title=likeString>{{
                 postProp.likes.length }}</p>
           </div>
         </div>
@@ -63,9 +65,11 @@ export default {
 
   setup(props) {
     let likerList = ref('')
+    let likeString = ref("Click to see who liked this post")
 
     return {
       likerList,
+      likeString,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
@@ -129,6 +133,7 @@ export default {
           AppState.searchedProfiles.forEach((profile) =>
             likerList.value += (profile.name + '\n')
           )
+          likeString.value = likerList.value
         } catch (error) {
           Pop.error(error)
         }

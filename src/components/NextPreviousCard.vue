@@ -1,8 +1,9 @@
 <template>
   <div class="col-12 d-flex justify-content-around mt-3 mb-4">
     <button @click="changePage(previous)" :class="[!previous ? 'hidden' : '']" :disabled="!previous"
-      class="btn btn-theme"><i class="mdi mdi-arrow-left"></i>Previous 20 Posts</button>
-    <button @click="changePage(next)" :class="[!next ? 'hidden' : '']" :disabled="!next" class="btn btn-theme">Next 20
+      title="Previous 20 Posts" class="btn btn-theme"><i class="mdi mdi-arrow-left"></i>Previous 20 Posts</button>
+    <button @click="changePage(next)" :class="[!next ? 'hidden' : '']" :disabled="!next" title="Next 20 Posts"
+      class="btn btn-theme">Next 20
       Posts<i class="mdi mdi-arrow-right"></i></button>
   </div>
 </template>

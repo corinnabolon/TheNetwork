@@ -4,8 +4,8 @@
       <div class="modal-content themeBg">
         <div class="modal-header">
           <p class="modal-title fs-4 font-themeGreen agbalumo">Edit Your Post</p>
-          <button @click="resetEditableValue()" type="button" class="btn-close" data-bs-dismiss="modal"
-            aria-label="Close"></button>
+          <button @click="resetEditableValue()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+            title="Cancel your edits"></button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="editPost()">
@@ -20,9 +20,9 @@
                 title="URL of a picture for your post (optional)" maxlength="500" />
             </div>
             <div class="mt-4 d-flex justify-content-end">
-              <button @click="resetEditableValue()" type="button" class="btn btn-theme2 me-4"
-                data-bs-dismiss="modal">Cancel Edit</button>
-              <button type="submit" class="btn btn-theme-danger">Save Changes</button>
+              <button @click="resetEditableValue()" type="button" class="btn btn-theme2 me-4" data-bs-dismiss="modal"
+                title="Cancel your edit">Cancel Edit</button>
+              <button type="submit" class="btn btn-theme-danger" title="Save your changes">Save Changes</button>
             </div>
           </form>
         </div>

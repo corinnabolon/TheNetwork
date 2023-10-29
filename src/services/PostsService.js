@@ -1,6 +1,5 @@
 import { AppState } from "../AppState.js"
 import { Post } from "../models/Post.js"
-import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 
@@ -18,9 +17,10 @@ class PostsService {
   async likePost(postId) {
     const res = await api.post(`api/posts/${postId}/like`)
     let updatedPost = new Post(res.data)
-    logger.log("Liked post data", updatedPost)
     let postIndex = AppState.posts.findIndex(post => post.id == postId)
     if (postIndex == -1) { return }
+    let oldPost = AppState.posts[postIndex]
+    updatedPost.updatedAt = oldPost.updatedAt
     AppState.posts.splice(postIndex, 1, updatedPost)
   }
 
