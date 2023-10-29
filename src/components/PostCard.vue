@@ -30,7 +30,9 @@
                 <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline heart-theme"></i>
               </div>
             </div>
-            <p v-if="postProp.likes.length >= 1" class="number-theme">{{ postProp.likes.length }}</p>
+            <p v-if="postProp.likes.length >= 1" class="number-theme" role="button" @click="findLikers()"
+              data-bs-toggle="modal" data-bs-target="#LikersModal" :title="likerList">{{
+                postProp.likes.length }}</p>
           </div>
         </div>
         <div v-if="postProp.creator.id == account.id">
@@ -43,28 +45,56 @@
     </div>
     <EditPostComponent />
   </section>
+  <LikersComponent />
 </template>
 
 
 <script>
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AuthService } from '../services/AuthService'
 import { logger } from "../utils/Logger.js";
+import { profilesService } from "../services/ProfilesService.js"
 
 export default {
   props: { postProp: { type: Post, required: true } },
 
   setup(props) {
+    let likerList = ref('')
+
+    // async function findLikers() {
+    //     try {
+    //       AppState.posts.forEach((post) {
+    //         post.likeIds
+    //       })
+    //       AppState.searchedProfiles = []
+    //       let postId = props.postProp.id
+    //       logger.log(postId)
+    //       let foundPost = AppState.posts.find((post) => postId == post.id)
+    //       let likers = foundPost.likeIds
+    //       for (let i = 0; i < likers.length; i++) {
+    //         await profilesService.findLikers(likers[i])
+    //       }
+    //       likerList.value = ''
+    //       AppState.searchedProfiles.forEach((profile) =>
+    //         likerList.value += (profile.name + '\n')
+    //       )
+    //       logger.log(likerList)
+    //     } catch (error) {
+    //       Pop.error(error)
+    //     }
+    //   }
 
     return {
+      likerList,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
       activePost: computed(() => AppState.activePost),
+      searchedProfiles: computed(() => AppState.searchedProfiles),
       isLikedByAccount: computed(() =>
         props.postProp.likeIds.includes(AppState.account.id)
       ),
@@ -106,10 +136,30 @@ export default {
         postsService.setActivePost(postId)
       },
 
-
       async sendToLogin() {
         AuthService.loginWithPopup()
+      },
+
+      async findLikers() {
+        try {
+          AppState.searchedProfiles = []
+          let postId = props.postProp.id
+          logger.log(postId)
+          let foundPost = AppState.posts.find((post) => postId == post.id)
+          let likers = foundPost.likeIds
+          for (let i = 0; i < likers.length; i++) {
+            await profilesService.findLikers(likers[i])
+          }
+          likerList.value = ''
+          AppState.searchedProfiles.forEach((profile) =>
+            likerList.value += (profile.name + '\n')
+          )
+          logger.log(likerList)
+        } catch (error) {
+          Pop.error(error)
+        }
       }
+
     }
 
   }
