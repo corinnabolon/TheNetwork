@@ -151,4 +151,15 @@ label {
 .margin-start {
   margin-left: 220px;
 }
+
+
+@media (max-width: 768px) {
+  .input-width-50 {
+    width: 80vw;
+  }
+
+  textarea {
+    width: 80vw;
+  }
+}
 </style>

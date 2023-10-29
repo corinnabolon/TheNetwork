@@ -6,7 +6,7 @@
         <PostForm />
       </div>
     </div>
-    <div v-for="post in posts" :key="post.id" class="col-12">
+    <div v-for="post in posts" :key="post.id" class="col-9 col-md-12">
       <PostCard :postProp="post" />
     </div>
     <NextPreviousCard />

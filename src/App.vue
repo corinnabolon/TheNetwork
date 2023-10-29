@@ -5,10 +5,10 @@
   <main class="themeBg">
     <div class="container-fluid">
       <section class="row">
-        <div class="col-10">
+        <div class="col-12 col-md-10">
           <router-view />
         </div>
-        <div class="col-2">
+        <div class="col-12 col-md-2">
           <AdCard />
         </div>
       </section>
@@ -48,6 +48,14 @@ export default {
 body {
   font-family: 'Lato', sans-serif;
   font-size: 16pt;
+}
+
+footer {
+  display: grid;
+  place-content: center;
+  height: 32px;
+  background-color: var(--themeGreen1);
+  color: var(--themeTan);
 }
 
 a {
@@ -107,13 +115,5 @@ a {
 
 #app {
   font-family: 'Lato', sans-serif;
-}
-
-footer {
-  display: grid;
-  place-content: center;
-  height: 32px;
-  background-color: var(--themeGreen1);
-  color: var(--themeTan);
 }
 </style>

@@ -85,4 +85,24 @@ export default {
 .margin-noclass {
   margin-left: 150px;
 }
+
+
+
+@media (max-width: 768px) {
+  .margin-class {
+    margin-left: 5px;
+  }
+
+  .margin-noclass {
+    margin-left: 100px;
+  }
+
+  .profile-picture {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin-top: 60%;
+    margin-left: 3%;
+  }
+}
 </style>

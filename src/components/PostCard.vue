@@ -1,6 +1,6 @@
 <template>
   <section class="row align-items-center">
-    <div class="col-11 light-brown-bg rounded shadow justify-content-around my-3 mx-5 px-5 py-3">
+    <div class="col-12 col-md-11 light-brown-bg rounded shadow justify-content-around my-3 mx-5 px-5 py-3">
       <router-link v-if="!activeProfile" :to="{ name: 'Profile', params: { profileId: postProp.creator.id } }">
         <div class="d-flex">
           <img :src="postProp.creator.picture" :alt="postProp.creator.name" class="rounded-circle user-image">
