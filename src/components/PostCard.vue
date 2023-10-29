@@ -1,30 +1,40 @@
 <template>
-  <section class="row align-items-center bg-light rounded shadow justify-content-around my-3">
-    <div class="col-10">
+  <section class="row align-items-center">
+    <div class="col-11 light-brown-bg rounded shadow justify-content-around my-3 mx-5 px-5 py-3">
       <router-link v-if="!activeProfile" :to="{ name: 'Profile', params: { profileId: postProp.creator.id } }">
         <div class="d-flex">
           <img :src="postProp.creator.picture" :alt="postProp.creator.name" class="rounded-circle user-image">
-          <p>{{ postProp.creator.name }}</p>
+          <p class="ms-2">{{ postProp.creator.name }}</p>
         </div>
       </router-link>
       <div class="col-12">
-        <p>Published: {{ postProp.createdAt }} Last Updated: {{ postProp.updatedAt }}</p>
-        <p>{{ postProp.body }}</p>
-        <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="Post Image" class="img-fluid">
-        <div class="d-flex justify-content-end">
-          <div v-if="!account.id">
-            <i role="button" @click="sendToLogin()" class="mdi mdi-heart-outline"></i>
+        <div :class="[postProp.creator.id == account.id ? 'own-post-border' : 'post-border']"
+          class="mt-2 d-flex flex-column">
+          <p class="m-2 mb-3">{{ postProp.body }}</p>
+          <img v-if="postProp.imgUrl" :src="postProp.imgUrl" alt="Post Image"
+            class="img-fluid align-self-center rounded mb-3">
+        </div>
+        <div class="d-flex justify-content-between mt-3">
+          <div class="align-self-end">
+            <p class="mb-0 pb-0">Published: {{ postProp.createdAt }}</p>
+            <p v-if="postProp.createdAt != postProp.updatedAt">Last Updated: {{ postProp.updatedAt }}</p>
           </div>
-          <div v-else>
-            <div>
-              <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)" class="mdi mdi-heart"></i>
-              <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline"></i>
+          <div class="d-flex fs-3">
+            <div v-if="!account.id">
+              <i role="button" @click="sendToLogin()" class="mdi mdi-heart-outline heart-theme"></i>
             </div>
+            <div v-else>
+              <div>
+                <i v-if="isLikedByAccount" role="button" @click="likePost(postProp.id)"
+                  class="mdi mdi-heart heart-theme"></i>
+                <i v-else role="button" @click="likePost(postProp.id)" class="mdi mdi-heart-outline heart-theme"></i>
+              </div>
+            </div>
+            <p v-if="postProp.likes.length >= 1" class="number-theme">{{ postProp.likes.length }}</p>
           </div>
-          <p v-if="postProp.likes.length >= 1">{{ postProp.likes.length }}</p>
         </div>
         <div v-if="postProp.creator.id == account.id">
-          <button @click="deletePost()" class="btn btn-danger mb-2">Delete Post</button>
+          <button @click="deletePost()" class="btn btn-danger my-3">Delete Post</button>
         </div>
       </div>
     </div>
@@ -100,5 +110,29 @@ export default {
   height: 5vh;
   width: 5vh;
   object-fit: cover;
+}
+
+.heart-theme {
+  color: var(--themeGreen1);
+}
+
+.heart-theme:hover {
+  color: var(--themeGreen2);
+}
+
+.number-theme {
+  color: var(--themeGreen1);
+}
+
+.post-border {
+  border: 2px solid var(--themeBrown);
+  border-radius: 25px;
+  padding: .5rem;
+}
+
+.own-post-border {
+  border: 2px solid var(--themeGreen1);
+  border-radius: 25px;
+  padding: .5rem;
 }
 </style>

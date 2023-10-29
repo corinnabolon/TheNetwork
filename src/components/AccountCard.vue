@@ -1,26 +1,27 @@
 <template>
   <section v-if="account" class="row">
-    <div class="col-11 bg-light rounded shadow m-3">
+    <div class="col-11 light-brown-bg rounded shadow m-3">
       <form @submit.prevent="editAccount()">
-        <div class="d-flex flex-column">
-          <div class="accountCard-coverImg">
-            <label for="coverImg" class="form-label">Cover Image URL</label>
-            <input type="url" v-model="editable.coverImg" class="form-control" id="coverImg"
+        <div class="d-flex flex-column fs-5">
+          <div class="accountCard-coverImg mt-3">
+            <label for="coverImg" class="form-label bg-blur rounded m-3">Cover Image URL:</label>
+            <input type="url" v-model="editable.coverImg" class="form-control mx-3 input-width-50" id="coverImg"
               aria-describedby="coverImg" />
             <img :src="accountProp.picture" :alt="accountProp.name" class="rounded-circle account-picture">
           </div>
           <!-- /// //TODO: Add title tags to everything and make sure all account aspects are on here -->
-          <div>
-            <label for="picture" class="form-label">Profile Image URL</label>
-            <input type="url" v-model="editable.picture" class="form-control" id="picture" aria-describedby="picture" />
+          <div class="d-flex mt-3 align-items-center">
+            <label for="picture" class="form-label margin-start-large">Profile Image URL:</label>
+            <input type="url" v-model="editable.picture" class="form-control input-width-50" id="picture"
+              aria-describedby="picture" />
           </div>
-          <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center margin-start-large mt-3">
             <div>
-              <label for="class" class="form-label">Attending Class</label>
+              <label for="class" class="form-label">Attending Class:</label>
               <input type="text" v-model="editable.class" class="form-control" id="class" aria-describedby="class" />
             </div>
             <div class="ms-5">
-              <label for="graduated">Check if Graduated</label>
+              <label for="graduated">Check if Graduated:</label>
               <input v-model="editable.graduated" class="checkbox ms-2" id="graduated" type="checkbox" name="graduated"
                 checked>
             </div>
@@ -28,16 +29,18 @@
           <div>
             <div>
               <label for="github" class="form-label">Github</label>
-              <input type="url" v-model="editable.github" class="form-control" id="github" aria-describedby="github" />
+              <input type="url" v-model="editable.github" class="form-control input-width-50" id="github"
+                aria-describedby="github" />
             </div>
             <div>
               <label for="linkedin" class="form-label">LinkedIn</label>
-              <input type="url" v-model="editable.linkedin" class="form-control" id="linkedin"
+              <input type="url" v-model="editable.linkedin" class="form-control input-width-50" id="linkedin"
                 aria-describedby="linkedin" />
             </div>
             <div>
               <label for="resume" class="form-label">Resume</label>
-              <input type="url" v-model="editable.resume" class="form-control" id="resume" aria-describedby="resume" />
+              <input type="url" v-model="editable.resume" class="form-control input-width-50" id="resume"
+                aria-describedby="resume" />
             </div>
           </div>
           <div>
@@ -46,7 +49,9 @@
               <textarea cols="5" type="text" v-model="editable.bio" class="form-control" id="bio"
                 aria-describedby="bio" />
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Submit Changes</button>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-theme my-3 margin-start">Submit Changes</button>
+            </div>
           </div>
         </div>
       </form>
@@ -104,6 +109,21 @@ export default {
 
 
 <style lang="scss" scoped>
+input {
+  opacity: 75%;
+}
+
+textarea {
+  opacity: 75%;
+  width: 50vw;
+  height: 30vh;
+}
+
+label {
+  margin-bottom: 0;
+  margin-top: 1%;
+}
+
 .accountCard-coverImg {
   background-image: v-bind(accountCoverImg);
   background-size: cover;
@@ -116,7 +136,19 @@ export default {
   width: 180px;
   height: 180px;
   object-fit: cover;
-  margin-top: 25%;
-  margin-left: 4%;
+  margin-top: 12%;
+  margin-left: 1%;
+}
+
+.margin-start-large {
+  margin-left: 22%;
+}
+
+.input-width-50 {
+  width: 50vw;
+}
+
+.margin-start {
+  margin-left: 220px;
 }
 </style>

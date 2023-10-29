@@ -1,10 +1,11 @@
 <template>
-  <div class="about text-center">
-    <h1>Welcome {{ account.name }}</h1>
+  <div class="about text-center font-themeGreen">
+    <p class="fs-1 agbalumo mt-2">Welcome {{ account.name }}!</p>
+    <p class="fs-3">You can edit your account information below.</p>
     <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
+    <p class="fs-4 fw-bold mt-2">{{ account.email }}</p>
     <router-link :to="{ name: 'Profile', params: { profileId: `${account.id}` } }">
-      <button class="btn btn-success">Go To Your Profile Page</button>
+      <button class="btn btn-theme">Go To Your Profile Page</button>
     </router-link>
   </div>
   <div v-if="account" class="col-12">

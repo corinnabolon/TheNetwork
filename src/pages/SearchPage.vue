@@ -6,7 +6,7 @@
         <input v-model="editable" type="text" class="form-control" id="searchProfiles">
         <div class="form-text">Search through profile names.</div>
       </div>
-      <button :disabled="editable == ''" type="submit" class="btn btn-primary">Submit</button>
+      <button :disabled="editable == ''" type="submit" class="btn btn-theme">Submit</button>
     </form>
   </div>
   <div>
@@ -16,7 +16,7 @@
         <input v-model="editable2" type="text" class="form-control" id="searchPosts">
         <div class="form-text">Search through posts.</div>
       </div>
-      <button :disabled="editable2 == ''" type="submit" class="btn btn-primary">Submit</button>
+      <button :disabled="editable2 == ''" type="submit" class="btn btn-theme">Submit</button>
     </form>
   </div>
   <div>
@@ -97,4 +97,17 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn-theme {
+  background-color: var(--themeBrown);
+  color: var(--themeTan);
+  border: 2px solid var(--themeGreen2);
+  font-size: 16pt;
+}
+
+.btn-theme:hover {
+  background-color: var(--themeGreen2);
+  color: var(--themeBrown);
+  border: 2px solid var(--themeBrown);
+}
+</style>

@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg nav-color px-3">
+  <nav class="navbar navbar-expand-lg title-color px-3 agbalumo">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <!-- <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
       </div> -->
-      <p class="nav-color fw-bold fs-3 mb-0 pb-0">Home</p>
+      <p class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">Home</p>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,8 +13,14 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'Search' }" class="nav-color fw-bold fs-3 mb-0 pb-0">
+          <router-link :to="{ name: 'Search' }" class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">
             Search
+          </router-link>
+        </li>
+        <li :class="[account.id ? '' : 'hidden']">
+          <router-link :to="{ name: 'Profile', params: { profileId: `${account.id}` } }"
+            class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">
+            My Profile
           </router-link>
         </li>
       </ul>
@@ -25,10 +31,14 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { AppState } from "../AppState.js";
 import Login from './Login.vue';
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account)
+    }
   },
   components: { Login }
 }
@@ -41,11 +51,6 @@ a:hover {
 
 .nav-link {
   text-transform: uppercase;
-}
-
-.nav-color {
-  background-color: var(--themeGreen1);
-  color: var(--themeTan);
 }
 
 .navbar-nav .router-link-exact-active {

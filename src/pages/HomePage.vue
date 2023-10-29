@@ -1,7 +1,7 @@
 <template>
   <section class="row">
     <div v-if="account.id" class="col-12">
-      <button @click="flipWantsToSee()" v-if="account" class="btn btn-success mt-3">Make a New Post</button>
+      <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mt-3">Make a New Post</button>
       <div v-if="wantsToSee">
         <PostForm />
       </div>

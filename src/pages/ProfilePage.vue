@@ -5,7 +5,7 @@
         <ProfileCard :profileProp="activeProfile" />
         <div v-if="posts.length">
           <div>
-            <div v-if="account">
+            <div v-if="account" class="agbalumo font-themeGreen mt-3">
               <p v-if="account.id == activeProfile.id" class="fs-1">Your Posts</p>
               <p v-else class="fs-1">{{ activeProfile.name }}'s Posts</p>
             </div>
@@ -14,7 +14,7 @@
             </div>
           </div>
           <div v-if="account.id == activeProfile.id">
-            <button @click="flipWantsToSee()" v-if="account" class="btn btn-success">Make a New Post</button>
+            <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3">Make a New Post</button>
             <div v-if="wantsToSee">
               <PostForm />
             </div>
@@ -22,15 +22,10 @@
           <div v-for="post in posts" :key="post.id" class="col-12">
             <PostCard :postProp="post" />
           </div>
-          <div class="col-12 d-flex justify-content-around mt-3 mb-4">
-            <button @click="changePage(previous)" :disabled="!previous" class="btn btn-success"><i
-                class="mdi mdi-arrow-left"></i>Previous 20 Posts</button>
-            <button @click="changePage(next)" :disabled="!next" class="btn btn-success">Next 20 Posts<i
-                class="mdi mdi-arrow-right"></i></button>
-          </div>
+          <NextPreviousCard />
         </div>
         <div v-else>
-          <button @click="flipWantsToSee()" v-if="account" class="btn btn-success mt-3">Make a New Post</button>
+          <button @click="flipWantsToSee()" v-if="account" class="btn btn-theme mb-3">Make a New Post</button>
           <div v-if="wantsToSee">
             <PostForm />
           </div>

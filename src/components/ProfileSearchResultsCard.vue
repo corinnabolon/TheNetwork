@@ -1,6 +1,6 @@
 <template>
   <router-link :to="{ name: 'Profile', params: { profileId: searchResultsProp.id } }">
-    <div class="col-12 bg-light rounded shadow my-3 d-flex">
+    <div class="col-12 light-brown-bg text-dark rounded shadow my-3 d-flex">
       <img :src="searchResultsProp.picture" :alt="searchResultsProp.name" class="rounded-circle profile-picture">
       <div class="ms-5 mt-3">
         <p class="fs-5 mb-0">{{ searchResultsProp.class }}</p>

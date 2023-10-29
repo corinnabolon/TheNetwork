@@ -1,8 +1,8 @@
 <template>
   <section class="row">
-    <div class="col-11 bg-light rounded shadow m-3">
+    <div class="col-11 light-brown-bg rounded shadow m-3">
       <div class="d-flex flex-column">
-        <div class="profileCard-coverImg">
+        <div class="profileCard-coverImg mt-3">
           <img :src="profileProp.picture" :alt="profileProp.name" class="rounded-circle profile-picture">
         </div>
         <!-- /// //TODO: Add title tags to everything and make sure all profile aspects are on here -->
@@ -12,20 +12,21 @@
           <a v-if="profileProp.linkedin" :href="profileProp.linkedin"><i class="mdi mdi-linkedin mx-3"></i></a>
           <a v-if="profileProp.resume" :href="profileProp.resume"><i class="mdi mdi-text-box-outline mx-3"></i></a>
         </div>
-        <div class="mt-5">
+        <div class="mt-5 ms-5">
           <p>{{ profileProp.class }}
-            <i v-if="profileProp.graduated" class="mdi mdi-account-school"
+            <i v-if="profileProp.graduated" class="grad-icon mdi mdi-account-school"
               :title="`${profileProp.name} has graduated!`"></i>
-            <i v-else="profileProp.graduated" class="mdi mdi-chair-school"
+            <i v-else class="grad-icon mdi mdi-chair-school"
+              :class="[profileProp.class ? 'margin-class' : 'margin-noclass']"
               :title="`${profileProp.name} has not graduated yet!`"></i>
           </p>
-          <p class="fs-1">{{ profileProp.name }}</p>
         </div>
-        <div>
+        <div class="m-2">
+          <p class="fs-1">{{ profileProp.name }}</p>
           <p>{{ profileProp.bio }}</p>
         </div>
         <router-link v-if="profileProp.id == account.id" :to="{ name: 'Account' }">
-          <button class="btn btn-success">Edit Account Information</button>
+          <button class="btn btn-theme mb-3">Edit Account Information</button>
         </router-link>
       </div>
     </div>
@@ -66,7 +67,22 @@ export default {
   width: 180px;
   height: 180px;
   object-fit: cover;
-  margin-top: 25%;
-  margin-left: 4%;
+  margin-top: 20%;
+  margin-left: 3%;
+}
+
+.grad-icon {
+  border: 2px solid var(--themeGreen1);
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 16pt;
+}
+
+.margin-class {
+  margin-left: 5px;
+}
+
+.margin-noclass {
+  margin-left: 150px;
 }
 </style>
