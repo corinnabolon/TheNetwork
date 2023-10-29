@@ -25,12 +25,17 @@ class ProfilesService {
   }
 
   async findLikers(likerId) {
+    AppState.likers = ""
     const res = await api.get(`api/profiles/${likerId}`)
     AppState.searchedProfiles.push(res.data)
-    AppState.likers = ""
     AppState.searchedProfiles.forEach((profile) =>
       AppState.likers += (profile.name + '\n')
     )
+  }
+
+  resetAppStateLikers() {
+    AppState.likers = ""
+    AppState.searchedProfiles = []
   }
 
   clearData() {

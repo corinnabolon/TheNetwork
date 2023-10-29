@@ -52,11 +52,10 @@
 <script>
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AuthService } from '../services/AuthService'
-import { logger } from "../utils/Logger.js";
 import { profilesService } from "../services/ProfilesService.js"
 
 export default {
@@ -64,29 +63,6 @@ export default {
 
   setup(props) {
     let likerList = ref('')
-
-    // async function findLikers() {
-    //     try {
-    //       AppState.posts.forEach((post) {
-    //         post.likeIds
-    //       })
-    //       AppState.searchedProfiles = []
-    //       let postId = props.postProp.id
-    //       logger.log(postId)
-    //       let foundPost = AppState.posts.find((post) => postId == post.id)
-    //       let likers = foundPost.likeIds
-    //       for (let i = 0; i < likers.length; i++) {
-    //         await profilesService.findLikers(likers[i])
-    //       }
-    //       likerList.value = ''
-    //       AppState.searchedProfiles.forEach((profile) =>
-    //         likerList.value += (profile.name + '\n')
-    //       )
-    //       logger.log(likerList)
-    //     } catch (error) {
-    //       Pop.error(error)
-    //     }
-    //   }
 
     return {
       likerList,
@@ -111,6 +87,7 @@ export default {
           } else {
             Pop.success("You have unliked this post.")
           }
+          this.findLikers()
         } catch (error) {
           Pop.error(error)
         }
@@ -132,7 +109,6 @@ export default {
 
       setActivePost() {
         let postId = props.postProp.id
-        logger.log("postId from PostCard", postId)
         postsService.setActivePost(postId)
       },
 
@@ -142,9 +118,8 @@ export default {
 
       async findLikers() {
         try {
-          AppState.searchedProfiles = []
+          profilesService.resetAppStateLikers()
           let postId = props.postProp.id
-          logger.log(postId)
           let foundPost = AppState.posts.find((post) => postId == post.id)
           let likers = foundPost.likeIds
           for (let i = 0; i < likers.length; i++) {
@@ -154,7 +129,6 @@ export default {
           AppState.searchedProfiles.forEach((profile) =>
             likerList.value += (profile.name + '\n')
           )
-          logger.log(likerList)
         } catch (error) {
           Pop.error(error)
         }

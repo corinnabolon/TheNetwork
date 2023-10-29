@@ -11,12 +11,13 @@
           <form @submit.prevent="editPost()">
             <div>
               <label for="body" class="form-label">Your Post</label>
-              <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body" required
-                aria-describedby="body" />
+              <textarea cols="10" type="text" v-model="editable.body" class="form-control" id="body"
+                title="Your post body" maxlength="5000" required aria-describedby="body" />
             </div>
             <div>
               <label for="imgUrl" class="form-label mt-3">Add an image! (optional)</label>
-              <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
+              <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl"
+                title="URL of a picture for your post (optional)" maxlength="500" />
             </div>
             <div class="mt-4 d-flex justify-content-end">
               <button @click="resetEditableValue()" type="button" class="btn btn-theme2 me-4"
@@ -35,7 +36,6 @@
 import { AppState } from '../AppState';
 import { computed, ref, reactive, onMounted, watchEffect } from 'vue';
 import Pop from "../utils/Pop.js";
-import { logger } from "../utils/Logger.js";
 import { Modal } from 'bootstrap';
 import { postsService } from "../services/PostsService.js";
 
@@ -49,7 +49,6 @@ export default {
     watchEffect(() => {
       if (AppState.activePost) {
         editable.value = { ...AppState.activePost }
-        logger.log('WATCH')
       }
       else {
         editable.value = {}
@@ -68,10 +67,8 @@ export default {
 
       async editPost() {
         try {
-          logger.log("ActivePost from EditPostComponent", AppState.activePost)
           let activePost = AppState.activePost
           activePost = editable.value
-          logger.log(editable.value)
           await postsService.editPost(activePost)
           Modal.getOrCreateInstance('#EditPostModal').hide()
         } catch (error) {

@@ -28,7 +28,7 @@ export default {
       likers: computed(() => AppState.likers),
 
       resetAppStateLikers() {
-        profilesService.clearData();
+        profilesService.resetAppStateLikers();
       }
     }
   }

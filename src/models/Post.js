@@ -1,3 +1,6 @@
+import { api } from "../services/AxiosService.js"
+
+
 export class Post {
   constructor(data) {
     this.id = data._id || data.id
@@ -10,6 +13,7 @@ export class Post {
     this.creator = data.creator
     this.likes = data.likes
   }
+
 }
 
 let postData = `{

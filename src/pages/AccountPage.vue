@@ -5,7 +5,7 @@
     <img class="rounded" :src="account.picture" alt="" />
     <p class="fs-4 fw-bold mt-2">{{ account.email }}</p>
     <router-link :to="{ name: 'Profile', params: { profileId: `${account.id}` } }">
-      <button class="btn btn-theme">Go To Your Profile Page</button>
+      <button class="btn btn-theme" title="Profile Page">Go To Your Profile Page</button>
     </router-link>
   </div>
   <div v-if="account" class="col-12">

@@ -6,51 +6,51 @@
           <div class="accountCard-coverImg mt-3">
             <label for="coverImg" class="form-label bg-blur rounded m-3">Cover Image URL:</label>
             <input type="url" v-model="editable.coverImg" class="form-control mx-3 input-width-50" id="coverImg"
-              aria-describedby="coverImg" />
+              aria-describedby="coverImg" title="Input a cover page URL" />
             <img :src="accountProp.picture" :alt="accountProp.name" class="rounded-circle account-picture">
           </div>
-          <!-- /// //TODO: Add title tags to everything and make sure all account aspects are on here -->
           <div class="d-flex mt-3 align-items-center">
             <label for="picture" class="form-label margin-start-large">Profile Image URL:</label>
             <input type="url" v-model="editable.picture" class="form-control input-width-50" id="picture"
-              aria-describedby="picture" />
+              aria-describedby="picture" title="Input a profile picture URL" />
           </div>
           <div class="d-flex align-items-center margin-start-large mt-3">
             <div>
               <label for="class" class="form-label">Attending Class:</label>
-              <input type="text" v-model="editable.class" class="form-control" id="class" aria-describedby="class" />
+              <input type="text" v-model="editable.class" class="form-control" id="class" aria-describedby="class"
+                title="Input the class you attended" />
             </div>
             <div class="ms-5">
               <label for="graduated">Check if Graduated:</label>
               <input v-model="editable.graduated" class="checkbox ms-2" id="graduated" type="checkbox" name="graduated"
-                checked>
+                title="Check if graduated">
             </div>
           </div>
           <div>
             <div>
               <label for="github" class="form-label">Github</label>
               <input type="url" v-model="editable.github" class="form-control input-width-50" id="github"
-                aria-describedby="github" />
+                aria-describedby="github" title="Input your GitHub page URL" />
             </div>
             <div>
               <label for="linkedin" class="form-label">LinkedIn</label>
               <input type="url" v-model="editable.linkedin" class="form-control input-width-50" id="linkedin"
-                aria-describedby="linkedin" />
+                aria-describedby="linkedin" title="Input your LinkedIn page URL" />
             </div>
             <div>
               <label for="resume" class="form-label">Resume</label>
               <input type="url" v-model="editable.resume" class="form-control input-width-50" id="resume"
-                aria-describedby="resume" />
+                aria-describedby="resume" title="Input your resume URL" />
             </div>
           </div>
           <div>
             <div>
               <label for="bio" class="form-label">Bio</label>
-              <textarea cols="5" type="text" v-model="editable.bio" class="form-control" id="bio"
-                aria-describedby="bio" />
+              <textarea cols="5" type="text" v-model="editable.bio" class="form-control" id="bio" aria-describedby="bio"
+                title="Tell us about yourself!" />
             </div>
             <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-theme my-3 margin-start">Submit Changes</button>
+              <button type="submit" title="Submit Changes" class="btn btn-theme my-3 margin-start">Submit Changes</button>
             </div>
           </div>
         </div>

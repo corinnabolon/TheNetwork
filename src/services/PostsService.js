@@ -18,6 +18,7 @@ class PostsService {
   async likePost(postId) {
     const res = await api.post(`api/posts/${postId}/like`)
     let updatedPost = new Post(res.data)
+    logger.log("Liked post data", updatedPost)
     let postIndex = AppState.posts.findIndex(post => post.id == postId)
     if (postIndex == -1) { return }
     AppState.posts.splice(postIndex, 1, updatedPost)
@@ -58,9 +59,7 @@ class PostsService {
   async editPost(activePost) {
     activePost.updatedAt = new Date()
     const res = await api.put(`api/posts/${activePost.id}`, activePost)
-    logger.log("Edited post", res.data)
     let newPost = new Post(res.data)
-    logger.log("This is the new Post we're putting in the AppState", newPost)
     let postIndex = AppState.posts.findIndex((post) => post.id == newPost.id)
     AppState.posts.splice(postIndex, 1, newPost)
   }
