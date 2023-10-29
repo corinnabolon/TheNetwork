@@ -35,10 +35,13 @@
         </div>
         <div v-if="postProp.creator.id == account.id">
           <button @click="deletePost()" class="btn btn-theme-danger my-3">Delete Post</button>
-          <button @click="editPost()" class="btn btn-theme2 ms-5">Edit Post</button>
+          <button @click="setActivePost()" title="Open Edit Form" data-bs-toggle="modal" data-bs-target="#EditPostModal"
+            class="btn btn-theme2
+            ms-5">Edit Post</button>
         </div>
       </div>
     </div>
+    <EditPostComponent />
   </section>
 </template>
 
@@ -50,6 +53,7 @@ import { computed } from 'vue';
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AuthService } from '../services/AuthService'
+import { logger } from "../utils/Logger.js";
 
 export default {
   props: { postProp: { type: Post, required: true } },
@@ -60,6 +64,7 @@ export default {
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
+      activePost: computed(() => AppState.activePost),
       isLikedByAccount: computed(() =>
         props.postProp.likeIds.includes(AppState.account.id)
       ),
@@ -93,6 +98,12 @@ export default {
         } catch (error) {
           Pop.error(error)
         }
+      },
+
+      setActivePost() {
+        let postId = props.postProp.id
+        logger.log("postId from PostCard", postId)
+        postsService.setActivePost(postId)
       },
 
 

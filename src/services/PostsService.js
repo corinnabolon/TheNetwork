@@ -4,18 +4,15 @@ import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
 
-
 class PostsService {
 
   async getPosts() {
     AppState.activeProfile = null
     const res = await api.get("api/posts")
-    logger.log("res.data.posts", res.data.posts)
     let newPosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = newPosts
     AppState.nextPage = res.data.older;
     AppState.previousPage = res.data.newer;
-    logger.log("AppState.posts", AppState.posts)
   }
 
   async likePost(postId) {
@@ -51,6 +48,21 @@ class PostsService {
     AppState.posts = searchedPosts
     AppState.nextPage = res.data.older;
     AppState.previousPage = res.data.newer;
+  }
+
+  setActivePost(postId) {
+    let activePost = AppState.posts.find((post) => postId == post.id)
+    AppState.activePost = activePost
+  }
+
+  async editPost(activePost) {
+    activePost.updatedAt = new Date()
+    const res = await api.put(`api/posts/${activePost.id}`, activePost)
+    logger.log("Edited post", res.data)
+    let newPost = new Post(res.data)
+    logger.log("This is the new Post we're putting in the AppState", newPost)
+    let postIndex = AppState.posts.findIndex((post) => post.id == newPost.id)
+    AppState.posts.splice(postIndex, 1, newPost)
   }
 
 }

@@ -6,7 +6,7 @@ export class Post {
     this.creatorId = data.creatorId
     this.likeIds = data.likeIds
     this.createdAt = new Date(data.createdAt).toLocaleString()
-    this.updatedAt = new Date(data.createdAt).toLocaleString()
+    this.updatedAt = new Date(data.updatedAt).toLocaleString()
     this.creator = data.creator
     this.likes = data.likes
   }
