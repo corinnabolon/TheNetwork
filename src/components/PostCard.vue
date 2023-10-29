@@ -54,7 +54,7 @@
 <script>
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { computed, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AuthService } from '../services/AuthService'

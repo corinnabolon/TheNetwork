@@ -28,9 +28,6 @@
       </div>
     </div>
     <div v-else-if="haveSearchedPosts">
-      <!-- <div v-for="post in searchedPosts" :key="post.id">
-        <PostsSearchResultsCard :searchResultsProp="post" />
-      </div> -->
       <div v-for="post in searchedPosts" :key="post.id" class="col-9 col-md-12">
         <PostCard :postProp="post" />
       </div>

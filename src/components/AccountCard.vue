@@ -61,7 +61,6 @@
 
 
 <script>
-// import { Account } from "../models/Account.js";
 import { AppState } from '../AppState';
 import { computed, ref, watchEffect } from "vue";
 import Pop from "../utils/Pop.js";
@@ -88,7 +87,6 @@ export default {
     return {
       editable,
       accountCoverImg: computed(() => `url(${props.accountProp.coverImg})`),
-      // activeProfile: computed(() => AppState.activeProfile),
       account: computed(() => AppState.account),
 
       async editAccount() {

@@ -6,7 +6,6 @@
           <img :src="profileProp.picture" :alt="profileProp.name" class="rounded-circle profile-picture"
             :title="`${profileProp.name}'s profile picture`">
         </div>
-        <!-- /// //TODO: Add title tags to everything and make sure all profile aspects are on here -->
         <div class="fs-1 d-flex justify-content-end">
           <a v-if="profileProp.github" :href="profileProp.github" :title="`${profileProp.name}'s GitHub`"><i
               class="mdi mdi-github mx-3"></i></a>

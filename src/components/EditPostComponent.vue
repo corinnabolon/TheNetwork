@@ -34,14 +34,14 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, ref, reactive, onMounted, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import Pop from "../utils/Pop.js";
 import { Modal } from 'bootstrap';
 import { postsService } from "../services/PostsService.js";
 
 
 export default {
-  // props: { editPostProp: { type: Post, required: true } },
+
 
   setup() {
     let editable = ref({})

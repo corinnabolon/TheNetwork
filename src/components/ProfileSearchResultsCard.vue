@@ -13,8 +13,6 @@
 
 
 <script>
-// import { AppState } from '../AppState';
-// import { computed, reactive, onMounted } from 'vue';
 import { Profile } from "../models/Profile.js";
 
 export default {

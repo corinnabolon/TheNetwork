@@ -18,7 +18,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, ref, reactive, onMounted } from 'vue';
+import { computed } from 'vue';
 import { profilesService } from "../services/ProfilesService.js";
 
 export default {

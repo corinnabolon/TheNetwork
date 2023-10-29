@@ -1,9 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg title-color px-3 mb-0 py-0 agbalumo">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <!-- <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
-      </div> -->
       <p class="title-color fw-bold fs-1 mt-3 ms-3">Home</p>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -58,10 +55,4 @@ a:hover {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-
-/* @media screen and (min-width: 768px) {
-  nav {
-    height: 100px;
-  }
-} */
 </style>

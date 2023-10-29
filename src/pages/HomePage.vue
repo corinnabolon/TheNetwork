@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted } from "vue";
 import Pop from "../utils/Pop.js";
 import { postsService } from "../services/PostsService.js"
 import { AppState } from "../AppState.js"
@@ -53,18 +53,6 @@ export default {
       wantsToSee: computed(() => AppState.wantsToSeeForm),
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
-      // previous: computed(() => AppState.previousPage),
-      // next: computed(() => AppState.nextPage),
-
-      // async changePage(url) {
-      //   try {
-      //     await postsService.changePage(url)
-      //     scrollToTop()
-      //   } catch (error) {
-      //     Pop.error(error)
-      //   }
-      // }
-
     };
   },
 }
