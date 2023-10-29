@@ -34,7 +34,8 @@
           </div>
         </div>
         <div v-if="postProp.creator.id == account.id">
-          <button @click="deletePost()" class="btn btn-danger my-3">Delete Post</button>
+          <button @click="deletePost()" class="btn btn-theme-danger my-3">Delete Post</button>
+          <button @click="editPost()" class="btn btn-theme2 ms-5">Edit Post</button>
         </div>
       </div>
     </div>
@@ -88,6 +89,7 @@ export default {
           }
           let postId = props.postProp.id
           await postsService.deletePost(postId)
+          Pop.success("Post deleted.")
         } catch (error) {
           Pop.error(error)
         }

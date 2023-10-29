@@ -10,10 +10,10 @@
       <input type="url" v-model="editable.imgUrl" class="form-control" id="imgUrl" aria-describedby="imgUrl" />
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <button class="btn btn-theme my-3" type="submit">Post</button>
-      <div class="d-flex btn-theme align-items-center" title="Close text box">
-        <p class="m-0 p-0" role="button" @click="flipWantsToSee()"><i class="fs-2 mdi mdi-trash-can-outline"></i><i
-            class="fs-1 mdi mdi-arrow-up"></i></p>
+      <button class="btn btn-theme fs-3 py-2 my-3" type="submit">Post</button>
+      <div class="d-flex btn-theme rounded align-items-center" title="Close text box">
+        <p class="m-0 p-0" role="button" @click="flipWantsToSee()"><i
+            class="m-0 p-0 fs-2 mdi mdi-trash-can-outline"></i><i class="fs-1 m-0 p-0 mdi mdi-arrow-up"></i></p>
       </div>
     </div>
   </form>

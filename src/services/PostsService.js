@@ -1,6 +1,8 @@
 import { AppState } from "../AppState.js"
 import { Post } from "../models/Post.js"
+import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
+
 
 
 class PostsService {
@@ -8,10 +10,12 @@ class PostsService {
   async getPosts() {
     AppState.activeProfile = null
     const res = await api.get("api/posts")
+    logger.log("res.data.posts", res.data.posts)
     let newPosts = res.data.posts.map((postPOJO) => new Post(postPOJO))
     AppState.posts = newPosts
     AppState.nextPage = res.data.older;
     AppState.previousPage = res.data.newer;
+    logger.log("AppState.posts", AppState.posts)
   }
 
   async likePost(postId) {

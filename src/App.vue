@@ -43,6 +43,7 @@ export default {
   --themeTan: #ffe9b0;
   --themeBrown: #B2533E;
   --themeLightBrown: #eb9368c9;
+  --themeRed: rgb(182, 31, 31);
 }
 
 body {
@@ -64,6 +65,33 @@ a {
 
 .hidden {
   display: none;
+}
+
+.btn-theme-danger {
+  border: 2px solid var(--themeGreen1);
+  font-size: 16pt;
+  color: var(--themeTan);
+  background-color: var(--themeRed);
+}
+
+.btn-theme-danger:hover {
+  background-color: var(--themeGreen1);
+  color: black;
+  border: 2px solid var(--themeRed);
+  font-weight: bolder;
+}
+
+.btn-theme2 {
+  background-color: var(--themeBrown);
+  color: var(--themeTan);
+  border: 2px solid var(--themeGreen1);
+  font-size: 16pt;
+}
+
+.btn-theme2:hover {
+  background-color: var(--themeGreen1);
+  color: var(--themeBrown);
+  border: 2px solid var(--themeBrown);
 }
 
 .btn-theme {

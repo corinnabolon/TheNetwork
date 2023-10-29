@@ -1,10 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg title-color px-3 agbalumo">
+  <nav class="navbar navbar-expand-lg title-color px-3 mb-0 py-0 agbalumo">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <!-- <div class="d-flex flex-column align-items-center">
         <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
       </div> -->
-      <p class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">Home</p>
+      <p class="title-color fw-bold fs-1 mt-3 ms-3">Home</p>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,13 +13,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'Search' }" class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">
+          <router-link :to="{ name: 'Search' }" class="title-color fw-bold fs-1 mb-5 mt-0 ms-3">
             Search
           </router-link>
         </li>
         <li :class="[account.id ? '' : 'hidden']">
           <router-link :to="{ name: 'Profile', params: { profileId: `${account.id}` } }"
-            class="title-color fw-bold fs-1 mb-0 pb-0 ms-3">
+            class="title-color fw-bold fs-1 mb-5 mt-0 ms-4">
             My Profile
           </router-link>
         </li>
@@ -59,9 +59,9 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   nav {
-    height: 64px;
+    height: 100px;
   }
-}
+} */
 </style>
